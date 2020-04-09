@@ -42,3 +42,78 @@ class SessionManagement(Codeunit):
             return option.SessionType.BATCH
         else:
             error(label('Unknown session type \'{0}\''.format(Session.type)))
+
+    @PublicMethod
+    def login(self, email, password):
+        """
+        Authenticate user (has a COMMIT)
+        """
+        user = table.User()
+        user.reset()
+        if not user.isempty():
+            user.email.setrange(email)
+            user.password.setrange(user.hashpassword(password))
+            if not user.findfirst():
+                error(label('Invalid e-mail or password!'))
+
+        sess = table.Session()
+        if not sess.get(Session.id):
+            sess.error_notfound()
+        sess.userid = user.id
+        sess.modify()
+
+        auth = table.Authentication()
+        auth.reset()
+        auth.expireat.setfilter('..{0}', datetime.now())
+        if not auth.isempty():
+            auth.deleteall()
+
+        if Session.auth_token > '':
+            if not auth.get(Session.auth_token):
+                auth.init()
+                auth.token = Session.auth_token
+                auth.userid = user.id
+                auth.createdon = datetime.now()
+                auth.insert()
+
+            auth.expireat = datetime.now() + timedelta(hours=1)
+            auth.modify()
+
+        commit()
+
+        Session.authenticated = True
+        Session.user_id = user.id
+
+    @PublicMethod
+    def initialize(self):
+        if Session.auth_token > '':
+            auth = table.Authentication()
+            auth.token.setrange(Session.auth_token)
+            auth.expireat.setfilter('{0}..', datetime.now())
+            if auth.findfirst():
+                auth.expireat = datetime.now() + timedelta(hours=1)
+                auth.modify()
+
+                Session.authenticated = True
+                Session.user_id = auth.userid                
+
+        info = table.Information()
+        info.get()
+
+        return {
+            "background": "background.png",     # FIXME
+            "logo": "logo.png",                 # FIXME
+            "name": info.name.value,
+            "description": info.description.value,
+            "copyright": info.copyright.value,
+            "authenticated": Session.authenticated,
+
+            "label_signin": label('Sign in'),
+            "label_pwdlostqst": label('Password lost?'),
+            "label_email": label('E-Mail'),
+            "label_password": label('Password'),
+            "label_pwdlost": label('Password lost'),
+            "label_back": label('Back'),
+            "label_send": label('Send')
+        }            
+        

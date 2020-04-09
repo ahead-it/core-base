@@ -20,6 +20,7 @@ class Session(Table):
         self.server = FieldCode('Server', label('Server'), 100)
         self.processid = FieldInteger('Process ID', label('Process ID'))
         self.datetime = FieldDateTime('Date/Time', label('Date/Time'))
+        self.userid = FieldCode('User ID', label('User ID'), 50)
 
         self._setprimarykey(self.id)
               
