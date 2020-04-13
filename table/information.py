@@ -1,5 +1,4 @@
-from core import label, Table, FieldCode, FieldText
-from app import option
+from core import label, Table, field
 
 
 class Information(Table):
@@ -7,10 +6,10 @@ class Information(Table):
         self._name = 'Information'
         self._caption = label('Information')
         
-        self.pk = FieldCode('Primary key', label('Primary key'), 10)
-        self.name = FieldText('Name', label('Name'), 50)
-        self.description = FieldText('Description', label('Description'), 250)
-        self.copyright = FieldCode('Copyright', label('Copyright'), 50)
+        self.pk = field.Code('Primary key', label('Primary key'), 10)
+        self.name = field.Text('Name', label('Name'), 50)
+        self.description = field.Text('Description', label('Description'), 250)
+        self.copyright = field.Text('Copyright', label('Copyright'), 50)
 
         self._setprimarykey(self.pk)
               

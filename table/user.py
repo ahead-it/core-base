@@ -1,6 +1,5 @@
 import hashlib
-from core import *
-from app import option
+from core import label, Table, field
 
 
 class User(Table):
@@ -8,12 +7,12 @@ class User(Table):
         self._name = 'User'
         self._caption = label('User')
         
-        self.id = FieldCode('ID', label('ID'), 50)
-        self.name = FieldText('Name', label('Name'), 50)
-        self.email = FieldCode('E-Mail', label('E-Mail'), 100)
-        self.enabled = FieldBoolean('Enabled', label('Enabled'))
-        self.password = FieldText('Password', label('Password'), 50)
-        self.lastlogin = FieldDateTime('Last login', label('Last login'))
+        self.id = field.Code('ID', label('ID'), 50)
+        self.name = field.Text('Name', label('Name'), 50)
+        self.email = field.Code('E-Mail', label('E-Mail'), 100)
+        self.enabled = field.Boolean('Enabled', label('Enabled'))
+        self.password = field.Text('Password', label('Password'), 50)
+        self.lastlogin = field.DateTime('Last login', label('Last login'))
 
         self._setprimarykey(self.id)
               

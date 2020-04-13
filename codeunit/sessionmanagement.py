@@ -10,6 +10,23 @@ class SessionManagement(Codeunit):
         """
         Called when a session start
         """
+        auth = table.Authentication()
+        auth.reset()
+        auth.expireat.setfilter('..{0}', datetime.now())
+        if not auth.isempty():
+            auth.deleteall()
+
+        if Session.auth_token > '':
+            auth = table.Authentication()
+            auth.token.setrange(Session.auth_token)
+            auth.expireat.setfilter('{0}..', datetime.now())
+            if auth.findfirst():
+                auth.expireat = datetime.now() + timedelta(hours=1)
+                auth.modify()
+
+                Session.authenticated = True
+                Session.user_id = auth.userid    
+
         sess = table.Session()
         sess.init()
         sess.id = Session.id
@@ -44,7 +61,7 @@ class SessionManagement(Codeunit):
             error(label('Unknown session type \'{0}\''.format(Session.type)))
 
     @PublicMethod
-    def login(self, email, password):
+    def login(self, email, password, remember=False):
         """
         Authenticate user (has a COMMIT)
         """
@@ -62,22 +79,22 @@ class SessionManagement(Codeunit):
         sess.userid = user.id
         sess.modify()
 
-        auth = table.Authentication()
-        auth.reset()
-        auth.expireat.setfilter('..{0}', datetime.now())
-        if not auth.isempty():
-            auth.deleteall()
-
         if Session.auth_token > '':
+            auth = table.Authentication()
             if not auth.get(Session.auth_token):
                 auth.init()
                 auth.token = Session.auth_token
                 auth.userid = user.id
                 auth.createdon = datetime.now()
                 auth.insert()
-
-            auth.expireat = datetime.now() + timedelta(hours=1)
+            
+            if remember:
+                auth.expireat = datetime.now() + timedelta(days=90)
+            else:
+                auth.expireat = datetime.now() + timedelta(hours=1)
             auth.modify()
+
+            Client.save_auth_token(auth.expireat.value)
 
         commit()
 
@@ -86,17 +103,6 @@ class SessionManagement(Codeunit):
 
     @PublicMethod
     def initialize(self):
-        if Session.auth_token > '':
-            auth = table.Authentication()
-            auth.token.setrange(Session.auth_token)
-            auth.expireat.setfilter('{0}..', datetime.now())
-            if auth.findfirst():
-                auth.expireat = datetime.now() + timedelta(hours=1)
-                auth.modify()
-
-                Session.authenticated = True
-                Session.user_id = auth.userid                
-
         info = table.Information()
         info.get()
 
@@ -107,6 +113,7 @@ class SessionManagement(Codeunit):
             "description": info.description.value,
             "copyright": info.copyright.value,
             "authenticated": Session.authenticated,
+            "startpage": 'app.page.Welcome',
 
             "label_signin": label('Sign in'),
             "label_pwdlostqst": label('Password lost?'),
