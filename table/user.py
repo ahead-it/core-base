@@ -9,7 +9,7 @@ class User(Table):
         
         self.id = field.Code('ID', label('ID'), 50)
         self.name = field.Text('Name', label('Name'), 50)
-        self.email = field.Code('E-Mail', label('E-Mail'), 100)
+        self.email = field.Text('E-Mail', label('E-Mail'), 100)
         self.enabled = field.Boolean('Enabled', label('Enabled'))
         self.password = field.Text('Password', label('Password'), 50)
         self.lastlogin = field.DateTime('Last login', label('Last login'))

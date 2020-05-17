@@ -6,6 +6,16 @@ class SessionManagement(Codeunit):
     """
     System unit to handle session
     """
+
+    def server_start(self):
+        """
+        Once when server start
+        """
+        sess = table.Session()
+        sess.server.setrange(Session.hostname)
+        sess.deleteall()
+        commit()
+
     def start(self):
         """
         Called when a session start
@@ -25,7 +35,7 @@ class SessionManagement(Codeunit):
                 auth.modify()
 
                 Session.authenticated = True
-                Session.user_id = auth.userid    
+                Session.user_id = auth.userid.value
 
         sess = table.Session()
         sess.init()
@@ -83,7 +93,7 @@ class SessionManagement(Codeunit):
             auth = table.Authentication()
             if not auth.get(Session.auth_token):
                 auth.init()
-                auth.token = Session.auth_token
+                auth.token.value = Session.auth_token
                 auth.userid = user.id
                 auth.createdon = datetime.now()
                 auth.insert()
@@ -99,28 +109,36 @@ class SessionManagement(Codeunit):
         commit()
 
         Session.authenticated = True
-        Session.user_id = user.id
+        Session.user_id = user.id.value
 
     @PublicMethod
     def initialize(self):
+        """
+        Returns generic parameters for the client
+        """
         info = table.Information()
         info.get()
 
         return {
-            "background": "background.png",     # FIXME
-            "logo": "logo.png",                 # FIXME
-            "name": info.name.value,
-            "description": info.description.value,
-            "copyright": info.copyright.value,
-            "authenticated": Session.authenticated,
-            "startpage": 'app.page.Welcome',
+            'background': 'background.png',     # FIXME
+            'logo': 'logo.png',                 # FIXME
+            'logo_small': 'logo_small.png',     # FIXME
+            'icon': 'icon.png',                 # FIXME
+            'name': info.name.value,
+            'description': info.description.value,
+            'copyright': info.copyright.value,
+            'authenticated': Session.authenticated,
+            'startpage': 'app.page.Welcome',
 
-            "label_signin": label('Sign in'),
-            "label_pwdlostqst": label('Password lost?'),
-            "label_email": label('E-Mail'),
-            "label_password": label('Password'),
-            "label_pwdlost": label('Password lost'),
-            "label_back": label('Back'),
-            "label_send": label('Send')
+            'label_signin': label('Sign in'),
+            'label_pwdlostqst': label('Password lost?'),
+            'label_email': label('E-Mail'),
+            'label_password': label('Password'),
+            'label_pwdlost': label('Password lost'),
+            'label_back': label('Back'),
+            'label_send': label('Send'),
+            'label_credentials': label('Insert your credentials'),
+
+            'style_title': 'color: #000000'
         }            
         

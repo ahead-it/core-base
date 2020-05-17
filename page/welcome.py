@@ -1,4 +1,5 @@
 from core import *
+from app import page, table
 
 
 class Welcome(Page):
@@ -7,58 +8,50 @@ class Welcome(Page):
         self._caption = label('Welcome Page')
 
         if appctr := control.AppCenter(self):
-            if actarea := control.ActionArea(appctr):
-                if actcomp := control.Action(actarea, label('Components')):         
-                    pass
-
-                if actappl := control.Action(actarea, label('Applications')):            
-                    pass
-
-                if actcust := control.Action(actarea, label('Custom')):
-                    if acterrs := control.Action(actcust, label('Error Pages'), 'fa-exclamation-triangle'):
-                        self.error1 = control.Action(acterrs, label('Error 1'))
-                        self.error2 = control.Action(acterrs, label('Error 2'))
-                        self.error3 = control.Action(acterrs, label('Error 3'))
-
-                    if actwiza := control.Action(actarea, label('Wizard'), 'fa-magic'):
-                        pass
-
             self.search = control.Search(appctr)
 
-            if usrcent := control.UserCenter(appctr):
-                if actlist := control.ActionList(usrcent):
-                    self.myprofile = control.Action(actlist, label('My Profile'), 'fa-user')
+            self.usrcent = control.UserCenter(appctr)
+            if self.usrcent:
+                if actlist := control.ActionList(self.usrcent):
+                    self.myprofile = control.Action(actlist, label('My Profile'), Icon.USER)
                     self.myprofile.description = label('Account settings and more')
 
-                    self.mymessages = control.Action(actlist, label('My Messages'), 'fa-envelope-o')
-                    self.mymessages.description = label('Inbox and tasks')
-
-                if actarea := control.ActionArea(usrcent):
+                if actarea := control.ActionArea(self.usrcent):
                     self.signout = control.Action(actarea, label('Sign out'))
-                        
+
             if navpane := control.NavigationPane(appctr):
-                self.dashboard = control.Action(navpane, label('Dashboard'), 'fa-home')
+                self.dashboard = control.Action(navpane, label('Dashboard'), Icon.HOME)
 
-                if applgrp := control.ActionGroup(navpane, label('Applications')):
-                    if ecommr := control.Action(navpane, label('eCommerce'), 'fa-shopping-cart'):
-                        self.customers = control.Action(navpane, label('Customers'))
-                        self.products = control.Action(navpane, label('Products'))
+                if settgrp := control.ActionGroup(navpane, label('Settings')):
+                    if genact := control.Action(settgrp, label('General'), Icon.SETTINGS):
+                        self.actinfo = control.Action(genact, label('Information'))
 
-    def _error1_click(self):
-        if Client.confirm('Continue?'):
-            Client.message('Continue YES')        
-        else:
-            Client.message('BREAK')        
-                        
-    def _error2_click(self):
-        Client.message('Error 2 pressed')        
+                    if authact := control.Action(settgrp, label('Authentication'), Icon.USER):
+                        self.actuser = control.Action(authact, label('Users'))
 
-    def _error3_click(self):
-        Client.message('Error 3 pressed')        
+                    if sysact := control.Action(settgrp, label('System'), Icon.SYSTEM):
+                        self.actsess = control.Action(sysact, label('Sessions'))
 
-    def _search_search(self, what):
-        Client.message('You searched: ' + what)
+    def _onload(self):
+        usr = table.User()
+        usr.get(Session.user_id)
+        self.usrcent.username = usr.name.value
 
+    def _actuser_click(self):
+        usr = page.Users()
+        usr.run()
+
+    def _actinfo_click(self):
+        nfo = page.Information()
+        nfo.run()
+
+    def _actsess_click(self):
+        ses = page.Sessions()
+        ses.run()
+
+    def _signout_click(self):
+        if Client.confirm(label('Sign out?')):
+            Client.disconnect()
             
 
         
