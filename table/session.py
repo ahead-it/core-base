@@ -18,6 +18,7 @@ class Session(Table):
         self.type = field.Option('Type', label('Type'), option.SessionType)
         self.address = field.Code('Address', label('Address'), 50)
         self.server = field.Code('Server', label('Server'), 100)
+        self.instance = field.Code('Instance', label('Instance'), 50)
         self.processid = field.Integer('Process ID', label('Process ID'))
         self.datetime = field.DateTime('Date/Time', label('Date/Time'))
         self.userid = field.Code('User ID', label('User ID'), 50)

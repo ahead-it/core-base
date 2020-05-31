@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Base 1.0.20001.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-04-05 23:07+0000\n"
-"PO-Revision-Date: 2020-04-05 23:07+0000\n"
+"POT-Creation-Date: 2020-05-19 11:41+0000\n"
+"PO-Revision-Date: 2020-05-19 11:41+0000\n"
 "Last-Translator: Ahead\n"
 "Language: en_US\n"
 "Language-Team: Ahead\n"
@@ -21,6 +21,174 @@ msgstr ""
 
 msgctxt "app.base.codeunit.sessionmanagement"
 msgid "Unknown session type '{0}'"
+msgstr ""
+
+msgctxt "app.base.codeunit.sessionmanagement"
+msgid "Invalid e-mail or password!"
+msgstr ""
+
+msgctxt "app.base.codeunit.sessionmanagement"
+msgid "Sign in"
+msgstr ""
+
+msgctxt "app.base.codeunit.sessionmanagement"
+msgid "Password lost?"
+msgstr ""
+
+msgctxt "app.base.codeunit.sessionmanagement"
+msgid "E-Mail"
+msgstr ""
+
+msgctxt "app.base.codeunit.sessionmanagement"
+msgid "Password"
+msgstr ""
+
+msgctxt "app.base.codeunit.sessionmanagement"
+msgid "Password lost"
+msgstr ""
+
+msgctxt "app.base.codeunit.sessionmanagement"
+msgid "Back"
+msgstr ""
+
+msgctxt "app.base.codeunit.sessionmanagement"
+msgid "Send"
+msgstr ""
+
+msgctxt "app.base.codeunit.sessionmanagement"
+msgid "Insert your credentials"
+msgstr ""
+
+msgctxt "app.base.page.information"
+msgid "Information"
+msgstr ""
+
+msgctxt "app.base.page.information"
+msgid "General"
+msgstr ""
+
+msgctxt "app.base.page.sessions"
+msgid "Sessions"
+msgstr ""
+
+msgctxt "app.base.page.sessions"
+msgid "Session list"
+msgstr ""
+
+msgctxt "app.base.page.usercard"
+msgid "User Card"
+msgstr ""
+
+msgctxt "app.base.page.usercard"
+msgid "General"
+msgstr ""
+
+msgctxt "app.base.page.userprofile"
+msgid "User Profile"
+msgstr ""
+
+msgctxt "app.base.page.userprofile"
+msgid "General"
+msgstr ""
+
+msgctxt "app.base.page.users"
+msgid "Users"
+msgstr ""
+
+msgctxt "app.base.page.users"
+msgid "User list"
+msgstr ""
+
+msgctxt "app.base.page.welcome"
+msgid "Welcome Page"
+msgstr ""
+
+msgctxt "app.base.page.welcome"
+msgid "My Profile"
+msgstr ""
+
+msgctxt "app.base.page.welcome"
+msgid "Account settings and more"
+msgstr ""
+
+msgctxt "app.base.page.welcome"
+msgid "Sign out"
+msgstr ""
+
+msgctxt "app.base.page.welcome"
+msgid "Dashboard"
+msgstr ""
+
+msgctxt "app.base.page.welcome"
+msgid "Settings"
+msgstr ""
+
+msgctxt "app.base.page.welcome"
+msgid "General"
+msgstr ""
+
+msgctxt "app.base.page.welcome"
+msgid "Information"
+msgstr ""
+
+msgctxt "app.base.page.welcome"
+msgid "Authentication"
+msgstr ""
+
+msgctxt "app.base.page.welcome"
+msgid "Users"
+msgstr ""
+
+msgctxt "app.base.page.welcome"
+msgid "System"
+msgstr ""
+
+msgctxt "app.base.page.welcome"
+msgid "Sessions"
+msgstr ""
+
+msgctxt "app.base.page.welcome"
+msgid "Sign out?"
+msgstr ""
+
+msgctxt "app.base.table.authentication"
+msgid "Authentication"
+msgstr ""
+
+msgctxt "app.base.table.authentication"
+msgid "Token"
+msgstr ""
+
+msgctxt "app.base.table.authentication"
+msgid "User ID"
+msgstr ""
+
+msgctxt "app.base.table.authentication"
+msgid "Created on"
+msgstr ""
+
+msgctxt "app.base.table.authentication"
+msgid "Expire at"
+msgstr ""
+
+msgctxt "app.base.table.information"
+msgid "Information"
+msgstr ""
+
+msgctxt "app.base.table.information"
+msgid "Primary key"
+msgstr ""
+
+msgctxt "app.base.table.information"
+msgid "Name"
+msgstr ""
+
+msgctxt "app.base.table.information"
+msgid "Description"
+msgstr ""
+
+msgctxt "app.base.table.information"
+msgid "Copyright"
 msgstr ""
 
 msgctxt "app.base.table.session"
@@ -65,5 +233,37 @@ msgstr ""
 
 msgctxt "app.base.table.session"
 msgid "Date/Time"
+msgstr ""
+
+msgctxt "app.base.table.session"
+msgid "User ID"
+msgstr ""
+
+msgctxt "app.base.table.user"
+msgid "User"
+msgstr ""
+
+msgctxt "app.base.table.user"
+msgid "ID"
+msgstr ""
+
+msgctxt "app.base.table.user"
+msgid "Name"
+msgstr ""
+
+msgctxt "app.base.table.user"
+msgid "E-Mail"
+msgstr ""
+
+msgctxt "app.base.table.user"
+msgid "Enabled"
+msgstr ""
+
+msgctxt "app.base.table.user"
+msgid "Password"
+msgstr ""
+
+msgctxt "app.base.table.user"
+msgid "Last login"
 msgstr ""
 

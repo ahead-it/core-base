@@ -43,6 +43,7 @@ class SessionManagement(Codeunit):
         sess.type = self.getsessiontype()
         sess.address = Session.address
         sess.server = Session.hostname
+        sess.instance = Application.instance['name']
         sess.processid = Session.process_id
         sess.datetime = datetime.now()
         sess.insert()
