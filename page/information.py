@@ -11,7 +11,6 @@ class Information(Page):
         if appctr := control.ContentArea(self):
             if gengrp := control.Group(appctr, label('General')):
                 control.Field(gengrp, self.rec.name)
-                
                 control.Field(gengrp, self.rec.description)
-
                 control.Field(gengrp, self.rec.copyright)
+                control.Field(gengrp, self.rec.indicator)

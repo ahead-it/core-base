@@ -24,6 +24,7 @@ class Welcome(Page):
 
                 if settgrp := control.ActionGroup(navpane, label('Settings')):
                     if genact := control.Action(settgrp, label('General'), Icon.SETTINGS):
+                        self.mailstp = control.Action(genact, label('Mail setup'))
                         self.actinfo = control.Action(genact, label('Information'))
 
                     if authact := control.Action(settgrp, label('Authentication'), Icon.USER):
@@ -36,6 +37,10 @@ class Welcome(Page):
         usr = table.User()
         usr.get(Session.user_id)
         self.usrcent.username = usr.name.value
+
+    def _mailstp_click(self):
+        stp = page.MailSetup()
+        stp.run()
 
     def _actuser_click(self):
         usr = page.Users()

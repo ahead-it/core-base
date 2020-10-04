@@ -128,6 +128,7 @@ class SessionManagement(Codeunit):
             'name': info.name.value,
             'description': info.description.value,
             'copyright': info.copyright.value,
+            'indicator': info.indicator.value,
             'authenticated': Session.authenticated,
             'startpage': 'app.page.Welcome',
 

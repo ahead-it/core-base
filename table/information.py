@@ -10,6 +10,7 @@ class Information(Table):
         self.name = field.Text('Name', label('Name'), 50)
         self.description = field.Text('Description', label('Description'), 250)
         self.copyright = field.Text('Copyright', label('Copyright'), 50)
+        self.indicator = field.Text('Indicator', label('Indicator'), 50)
 
         self._setprimarykey(self.pk)
               
