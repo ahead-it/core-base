@@ -19,10 +19,11 @@ class Welcome(Page):
                 if actarea := control.ActionArea(self.usrcent):
                     self.signout = control.Action(actarea, label('Sign out'))
 
-            if navpane := control.NavigationPane(appctr):
-                self.dashboard = control.Action(navpane, label('Dashboard'), Icon.HOME)
+            self.navpane = control.NavigationPane(appctr)
+            if self.navpane:
+                self.dashboard = control.Action(self.navpane, label('Dashboard'), Icon.HOME)
 
-                if settgrp := control.ActionGroup(navpane, label('Settings')):
+                if settgrp := control.ActionGroup(self.navpane, label('Settings')):
                     if genact := control.Action(settgrp, label('General'), Icon.SETTINGS):
                         self.mailstp = control.Action(genact, label('Mail setup'))
                         self.actinfo = control.Action(genact, label('Information'))

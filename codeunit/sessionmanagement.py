@@ -46,7 +46,8 @@ class SessionManagement(Codeunit):
         sess.instance = Application.instance['name']
         sess.processid = Session.process_id
         sess.datetime = datetime.now()
-        sess.insert()
+        sess.userid = Session.user_id
+        sess.insert(True)
 
     def stop(self):
         """
@@ -87,8 +88,8 @@ class SessionManagement(Codeunit):
         sess = table.Session()
         if not sess.get(Session.id):
             sess.error_notfound()
-        sess.userid = user.id
-        sess.modify()
+        sess.userid = user.id.value
+        sess.modify(True)
 
         if Session.auth_token > '':
             auth = table.Authentication()
