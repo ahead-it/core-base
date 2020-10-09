@@ -45,7 +45,7 @@ class Welcome(Page):
 
     def _actuser_click(self):
         usr = page.Users()
-        usr.run()
+        usr.runtask()
 
     def _actinfo_click(self):
         nfo = page.Information()
@@ -53,7 +53,7 @@ class Welcome(Page):
 
     def _actsess_click(self):
         ses = page.Sessions()
-        ses.run()
+        ses.runtask()
 
     def _signout_click(self):
         if Client.confirm(label('Sign out?')):
