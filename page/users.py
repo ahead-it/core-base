@@ -8,6 +8,7 @@ class Users(Page):
         self._caption = label('Users')
         self.rec = table.User()
         self._cardpage = page.UserCard
+        self._readonly = True
 
         if appctr := control.ContentArea(self):
             if reptr1 := control.Repeater(appctr, label('User list')):

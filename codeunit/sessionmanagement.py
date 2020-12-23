@@ -96,7 +96,7 @@ class SessionManagement(Codeunit):
             if not auth.get(Session.auth_token):
                 auth.init()
                 auth.token.value = Session.auth_token
-                auth.userid = user.id
+                auth.userid = user.id.value
                 auth.createdon = datetime.now()
                 auth.insert()
             
